@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import FriendsList from "./components/FriendsList";
+import { friends } from "./utils/FriendsInfo";
+import { useState } from "react";
+import FriendDetailedInfo from "./components/FriendDetailedInfo";
 
 function App() {
+  const [selectedFriend, setSelectedFriend] = useState(null);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <FriendsList friends={friends} setSelectedFriend={setSelectedFriend} />
+      {selectedFriend && (
+        <FriendDetailedInfo
+          friend={selectedFriend}
+          close={() => setSelectedFriend(null)}
+        />
+      )}
     </div>
   );
 }
