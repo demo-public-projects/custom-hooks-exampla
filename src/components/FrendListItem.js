@@ -1,22 +1,8 @@
-import { useState, useEffect } from "react";
+import { useFriendStatus } from "../hooks/useFriendStatus"
 
 export default function FriendListItem({ friend, setSelectedFriend }) {
-  const [isOnline, setIsOnline] = useState(null);
+  const isOnline = useFriendStatus(friend);
   
-  useEffect(() => {
-    function handleStatusChange(status) {
-      setIsOnline(status);
-    }
-    friend.subscribeToStatusChange(handleStatusChange);
-    return () => {
-      friend.unsubscribeFromStatusChange(handleStatusChange);
-    };
-  });
-
-  useEffect(() => {
-    setIsOnline(friend.isOnline);
-  }, [friend]);
-
   return (
     <li
       role="button"
